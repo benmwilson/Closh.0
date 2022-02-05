@@ -69,18 +69,20 @@ int main() {
         //                                                    //
         // /////////////////////////////////////////////////////
 
-
-        if(parallel == 0){ //sequential
+        //sequential section
+        if(parallel == 0){ 
         for(int i = 0; i < count; i++){
             //printf("Parent is: %d \n",getpid()); //this should be the parent process
             pid_t pid_fork = fork();
             if(pid_fork == -1){printf("Fork failed");}
 
+            //child process
             if(pid_fork == 0){ 
                 printf("Parent process is: %d with the child: %d\n",getppid(),getpid());
                 execvp(cmdTokens[0], cmdTokens); // replaces the current process with the given program // which essentially runs the command/program given
             }
-                
+            
+            //parent process
             else if (pid_fork > 0){ //this is the parent process
                 wait(NULL);
                 // waitpid(pid_fork);
@@ -90,10 +92,9 @@ int main() {
 
             }
         }
-        // for(int i = 0; i < count; i++){
-        //         wait(NULL);
-        //     }
-        } else if(parallel == 'p'){
+
+        //parallel section
+        } else if(parallel == 1){
 
         }
         
