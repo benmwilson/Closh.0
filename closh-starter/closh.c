@@ -7,6 +7,7 @@
 #include <string.h>
 #include <signal.h>
 #include <time.h>
+#include <sys/wait.h>
 
 #define TRUE 1
 #define FALSE 0
@@ -67,28 +68,33 @@ int main() {
         // to implement the rest of closh                     //
         //                                                    //
         // /////////////////////////////////////////////////////
-        
 
-        //want to make child processes of current program
-        // ie fork()
 
-        //then want to make each child process execute execvp(cmdTokens[0], cmdTokens); which will run the new user command
-        //have parallel or sequential processes 
-        //probs have to have some waiting for each process to execute if sequential
-        //parallelize if parallel
-
-        //if processes take longer than timeout to run, then terminate process
-        // printf("the parent process' id is: %d\n", getppid());
-        
-
-        //loop creates n amount of processes, but not n child processes from same root process
+        if(parallel == 0){ //sequential
         for(int i = 0; i < count; i++){
-            int pid_fork = fork();
-            if(pid_fork != 0){ //if the id of the forked process(child) is not a child process (parent process) then 
+            //printf("Parent is: %d \n",getpid()); //this should be the parent process
+            pid_t pid_fork = fork();
+            if(pid_fork == -1){printf("Fork failed");}
+
+            if(pid_fork == 0){ 
                 printf("Parent process is: %d with the child: %d\n",getppid(),getpid());
                 execvp(cmdTokens[0], cmdTokens); // replaces the current process with the given program // which essentially runs the command/program given
-                //exit(0); //use exit(0) if need to jump out of the for loop at this point
             }
+                
+            else if (pid_fork > 0){ //this is the parent process
+                wait(NULL);
+                // waitpid(pid_fork);
+                // if(time > timeout && timeout > 0){
+                //     kill(pid_fork, SIGKILL);
+                // }
+
+            }
+        }
+        // for(int i = 0; i < count; i++){
+        //         wait(NULL);
+        //     }
+        } else if(parallel == 'p'){
+
         }
         
         // just executes the given command once - REPLACE THIS CODE WITH YOUR OWN
