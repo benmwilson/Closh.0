@@ -69,30 +69,43 @@ int main() {
         //                                                    //
         // /////////////////////////////////////////////////////
 
+        int counter = 0;
         //sequential section
         if(parallel == 0){ 
         for(int i = 0; i < count; i++){
             //printf("Parent is: %d \n",getpid()); //this should be the parent process
             pid_t pid_fork = fork();
             if(pid_fork == -1){printf("Fork failed");}
-
+            
+            //start timer
+            clock_t time;
+            time = clock();
             //child process
             if(pid_fork == 0){ 
+                printf("%d\n", counter);
+                // if(counter == 2){
+                //     sleep(5);
+                //      printf("Parent process is: %d with the child: %d\n",getppid(),getpid());
+                // execvp(cmdTokens[0], cmdTokens); // replaces the current process with the given program // which essentially runs the command/program given
+                // } else{
                 printf("Parent process is: %d with the child: %d\n",getppid(),getpid());
                 execvp(cmdTokens[0], cmdTokens); // replaces the current process with the given program // which essentially runs the command/program given
+               // }
             }
             
             //parent process
             else if (pid_fork > 0){ //this is the parent process
-                wait(NULL);
-                // waitpid(pid_fork);
-                // if(time > timeout && timeout > 0){
-                //     kill(pid_fork, SIGKILL);
-                // }
+                time = clock() - time;
+                double time_elapsed = ((double)time)/CLOCKS_PER_SEC;
+                waitpid(pid_fork, NULL, 0);
+                if(time_elapsed > timeout && timeout > 0){
+                    kill(pid_fork, SIGKILL);
+                }
 
             }
+            counter ++;
         }
-
+        exit(1);
         //parallel section
         } else if(parallel == 1){
 
