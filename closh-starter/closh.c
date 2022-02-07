@@ -93,13 +93,14 @@ int main() {
                 printf("%d\n", counter);
                 printf("Parent process is: %d with the child: %d\n",getppid(),getpid());
                 execvp(cmdTokens[0], cmdTokens); // replaces the current process with the given program // which essentially runs the command/program given
-                time_end = clock();
+                
             }
             
             //parent process
              if (pid_fork > 0){ 
             printf("paret timeout: %d \n", timeout);
                 waitpid(pid_fork, NULL, 0);
+                time_end = clock();
                 time_elapsed = ((double)((time_end- time) * 1000) /CLOCKS_PER_SEC); //should give time elapsed in seconds
                 printf("time_elapsed: %f, timeout: %d \n", time_elapsed, timeout);
                 if(time_elapsed > timeout && timeout > 0){
