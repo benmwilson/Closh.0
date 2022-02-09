@@ -1,5 +1,7 @@
 // closh.0.c - COSC 315, Winter 2021 
 // Ben Wilson 35835933
+// Eric Shanks 72533946
+// Richardo Brown 10142529
 
 #include <stdio.h>
 #include <unistd.h>
