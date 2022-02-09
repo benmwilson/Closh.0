@@ -1,0 +1,61 @@
+ben@GigatronPrime:~/Documents/GitHub/Closh.0/closh.0$ ./closh.0
+closh.0> ./hellotest
+  count> 5
+  [p]arallel or [s]equential> s
+  timeout> 2
+Child process 3837 forked with Parent process 3790
+Hello World
+Alarm signal called, terminating child process 3837. I'll be back...
+Child process 3851 forked with Parent process 3790
+Hello World
+Alarm signal called, terminating child process 3851. I'll be back...
+Child process 3861 forked with Parent process 3790
+Hello World
+Alarm signal called, terminating child process 3861. I'll be back...
+Child process 3868 forked with Parent process 3790
+Hello World
+Alarm signal called, terminating child process 3868. I'll be back...
+Child process 3884 forked with Parent process 3790
+Hello World
+Alarm signal called, terminating child process 3884. I'll be back...
+closh.0>
+
+ben@GigatronPrime:~/Documents/GitHub/Closh.0/closh.0$ ./closh.0
+closh.0> ./hellotest
+  count> 3
+  [p]arallel or [s]equential> s
+  timeout> 2
+Child process 3973 forked with Parent process 3916
+Hello World
+Alarm signal called, terminating child process 3973. I'll be back...
+Child process 3992 forked with Parent process 3916
+Hello World
+Alarm signal called, terminating child process 3992. I'll be back...
+Child process 4004 forked with Parent process 3916
+Hello World
+Alarm signal called, terminating child process 4004. I'll be back...
+closh.0> 
+
+closh.0> ./hellotest
+  count> 4
+  [p]arallel or [s]equential> p
+  timeout> 6
+Child process 4067 forked with Parent process 3916
+Hello World
+Child process 4068 forked with Parent process 3916
+Child process 4069 forked with Parent process 3916
+Hello World
+Child process 4066 forked with Parent process 3916
+Hello World
+Hello World
+closh.0> 
+
+closh.0> ./hellotest
+  count> 2
+  [p]arallel or [s]equential> p
+  timeout> 2
+Child process 4212 forked with Parent process 3916
+Hello World
+Child process 4211 forked with Parent process 3916
+Hello World
+closh.0> 
