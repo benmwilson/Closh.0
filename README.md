@@ -23,16 +23,14 @@
 - [Contributors](#contributors)
 - [Resources](#resources)
 
+
+
 ### Documentation
  - [Project Outline](#project-outline)
  - [Design Choices](#design-choices)
  - [Feautres](#features)
  - [Sample Output](/sample-output.txt) TBD
-
-### Contributors
- - [Ben Wilson](https://github.com/benmwilson)
- - [Eric Shanks](https://github.com/EricShanks68)
- - [Richardo Brown](https://github.com/Buttertoastt)
+ 
  
 #### Project Outline
 
@@ -57,6 +55,14 @@ The features included in this project are creating new processes, having the pro
   * For the paralallel code, the lack of a waitpid() call or a waitpid() call with the parameter of WNOHANG will cause the parent process to continue without waiting for the child process to finish which causes the parent and all the children processes to run in parallel.
 
 *  The user produces a timeout value. If the time elapsed of the child process is greater than the timeout value then the parent kills the child process.
+
+
+### Contributors
+ - [Ben Wilson](https://github.com/benmwilson)
+ - [Eric Shanks](https://github.com/EricShanks68)
+ - [Richardo Brown](https://github.com/Buttertoastt)
+
+As a group, we decided to each attempt to tackle the project individually and try out our own different implementations. We eached coded out a parallel and sequential execution and then worked together to pick the best algorithm and make any suitable changes or fixes. The final code is the result of equal effort on the behalf of all group members, not one individual effort.
 
 
 ### Resources
