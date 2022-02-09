@@ -29,7 +29,7 @@
  - [Project Outline](#project-outline)
  - [Design Choices](#design-choices)
  - [Feautres](#features)
- - [Sample Output](/sample-output.txt) TBD
+ - [Sample Output](/sampleoutput.txt) 
  
  
 #### Project Outline
