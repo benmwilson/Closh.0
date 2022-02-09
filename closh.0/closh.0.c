@@ -48,11 +48,11 @@ int main() {
     
     int parallel; // whether to run in parallel or sequentially
     
-    signal(SIGALRM, terminator);
+    signal(SIGALRM, terminator); // can't forget to register the signal handler
     
     while (TRUE) { // main shell input loop
         
-        // begin parsing code - do not modify --- har har har i modified it /bw
+        // begin parsing code - do not modify --- har har har i modified it , boogie woogie /bw
         printf("closh.0> ");
         fgets(cmd, sizeof(cmd), stdin);
         if (cmd[0] == '\n') continue;
@@ -102,7 +102,7 @@ int main() {
 					
                     alarm(timeout); // if the child process that is currently running exceeds the timeout then the alarm goes
 					
-                    waitpid(-1, NULL, 0); // sits and waits for all child processes to end  (-1 for any process)
+                    waitpid(-1, NULL, 0); // sits and waits for all child processes to end  (-1 as arg to match for any process)
 
 				}
 			}
