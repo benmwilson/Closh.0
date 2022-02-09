@@ -29,6 +29,15 @@ char readChar() {
     return c;
 }
 
+pid_t pid_fork;
+
+int terminator(int inSignal) { // handler function for the alarm, aka the terminator
+	
+    printf("Alarm signal called, terminating child process %d. I'll be back...\n", pid_fork);
+    kill(pid_fork, SIGKILL); // kill child process, rest in pep
+    return pid_fork;
+}
+
 // main method - program entry point
 int main() {
     char cmd[81]; // array of chars (a string)
@@ -36,6 +45,8 @@ int main() {
     int count; // number of times to execute command //number of copies of program
     int parallel; // whether to run in parallel or sequentially
     int timeout; // max seconds to run set of commands (parallel) or each command (sequentially)
+
+    signal(SIGALRM, terminator);
     
     while (TRUE) { // main shell input loop
         
@@ -58,10 +69,6 @@ int main() {
         // end parsing code
 
         
-
-
-
-        
         ////////////////////////////////////////////////////////
         //                                                    //
         // TODO: use cmdTokens, count, parallel, and timeout  //
@@ -76,91 +83,78 @@ int main() {
         clock_t time_end;
         clock_t time;
         double time_elapsed;
-
-        printf("og timeout value: %d \n", timeout);
+        int status;
+        pid_t current_pid; //rename
+        int killed;
 
         //sequential section
         if(parallel == 0){ 
         for(int i = 0; i < count; i++){
             //printf("Parent is: %d \n",getpid()); //this should be the parent process
-            pid_t pid_fork = fork();
+            pid_fork = fork();
             if(pid_fork == -1){printf("Fork failed");}
 
-            //child process
-            if(pid_fork == 0){ 
-                //start timer
-                time = clock();
-                printf("%d\n", counter);
-                printf("Parent process is: %d with the child: %d\n",getppid(),getpid());
-                execvp(cmdTokens[0], cmdTokens); // replaces the current process with the given program // which essentially runs the command/program given
                 
+              //child process
+            if(pid_fork == 0){ 
+                printf("iteration number is %d Parent process is: %d with the child: %d\n",counter, getppid(),getpid());
+                execvp(cmdTokens[0], cmdTokens); // replaces the current process with the given program // which essentially runs the command/program given
+                printf("Child process %d failed execution\n", getpid());
+                exit(1);
             }
             
             //parent process
-             if (pid_fork > 0){ 
-            printf("paret timeout: %d \n", timeout);
-                waitpid(pid_fork, NULL, 0);
-                time_end = clock();
-                time_elapsed = ((double)((time_end- time) * 1000) /CLOCKS_PER_SEC); //should give time elapsed in seconds
-                printf("time_elapsed: %f, timeout: %d \n", time_elapsed, timeout);
-                if(time_elapsed > timeout && timeout > 0){
-                    kill(pid_fork, SIGKILL);
-                    printf("killed  %d\n", pid_fork);
+             else if (pid_fork > 0){ 
+            //wait for child process before continuing 
+                current_pid = waitpid(pid_fork, &status, 0); 
+                if(current_pid == pid_fork){
+                    killed = alarm(timeout); // if the child process that is currently running exceeds the timeout then the alarm goes
+                    if(killed != 0){
+                    printf("iteration number is %d child process %d is finished \n",counter, getpid());
+                    }
                 }
-            //timer reset for the sequential section?
-            //time = clock();
             }
+            //keep track of iteration order
             counter ++;
         }
         exit(1);
         //parallel section
         } else if(parallel == 1){
             for(int i = 0; i < count; i++){
-            //printf("Parent is: %d \n",getpid()); //this should be the parent process
-             pid_forkp = fork();
+            pid_forkp = fork();
             if(pid_forkp == -1){printf("Fork failed");}
             
             //child process
             if(pid_forkp == 0){ 
-                //start timer
-                timep= clock();
-                printf("%d\n", counter);
-                printf("Parent process is: %d with the child: %d\n",getppid(),getpid());
+                printf("iteration number is %d Parent process is: %d with the child: %d\n",counter, getppid(),getpid());
                 execvp(cmdTokens[0], cmdTokens); // replaces the current process with the given program // which essentially runs the command/program given
+                printf("Child process %d failed execution\n", getpid());
+                exit(1);
 
             }
             
             //parent process
-            else if (pid_forkp > 0){ //this is the parent process
-                // time = clock() - time;
-                // double time_elapsed = ((double)time)/CLOCKS_PER_SEC;
-                pid_array[counter] = pid_forkp;
+            else if (pid_forkp > 0){ 
+                current_pid = waitpid(pid_fork, &status, WNOHANG); 
+                 if(current_pid == pid_fork){
+                    killed = alarm(timeout); // if the child process that is currently running exceeds the timeout then the alarm goes
+                    if(killed != 0){
+                    printf("iteration number is %d child process %d is finished \n",counter, getpid());
+                    }
+                }
 
             }
             counter ++;
         }
-        //check the timeout for the child processes
-        for(int i =0; i < count; i++){
-            printf("element %d in the pid array is %d: \n", i, pid_array[i]);
-             timep = clock() - timep;
-                double time_elapsedp = ((double)timep)/CLOCKS_PER_SEC;
-                printf("time_elapsed: %f, timeout: %d \n", time_elapsedp, timeout);
-                waitpid(pid_forkp, NULL, 0);
-                if(time_elapsedp > timeout && timeout > 0){
-                    kill(pid_forkp, SIGKILL);
-                    printf("killed  %d\n", pid_forkp);
-
-                }
+        // //check the timeout for the child processes
+        // for(int i =0; i < count; i++){
+        //      alarm(timeout); // if the child process that is currently running exceeds the timeout then the alarm goes
+        //         }
         }
         exit(1);
-
-        }
-        
-        // just executes the given command once - REPLACE THIS CODE WITH YOUR OWN
-        // execvp(cmdTokens[0], cmdTokens); // replaces the current process with the given program
-        // doesn't return unless the calling failed
-        //printf("Can't execute %s\n", cmdTokens[0]); // only reached if running the program failed
-        exit(1);        
     }
+        
+        exit(1);        
 }
+
 

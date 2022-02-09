@@ -1,0 +1,80 @@
+
+Output for the sequential section:
+using test.c as the testing program
+
+closh> ./test
+  count> 5
+  [p]arallel or [s]equential> s
+  timeout> 5
+iteration number is 0
+Parent process is: 4746 with the child: 4817
+ran test file
+time_elapsed inside test file: 1.746643
+finished test file
+time_elapsed: 0.002117, timeout: 5 
+iteration number is 1
+Parent process is: 4746 with the child: 4834
+ran test file
+time_elapsed inside test file: 1.765141
+finished test file
+time_elapsed: 0.002733, timeout: 5 
+iteration number is 2
+Parent process is: 4746 with the child: 4841
+ran test file
+time_elapsed inside test file: 1.752061
+finished test file
+time_elapsed: 0.002978, timeout: 5 
+iteration number is 3
+Parent process is: 4746 with the child: 4860
+ran test file
+time_elapsed inside test file: 1.744461
+finished test file
+time_elapsed: 0.003132, timeout: 5 
+iteration number is 4
+Parent process is: 4746 with the child: 4861
+ran test file
+time_elapsed inside test file: 1.753591
+finished test file
+time_elapsed: 0.003334, timeout: 5 
+
+Results: we can see the program ran sequentially by seeinng that the iteration number is sequential. 
+Can see that correct number of child processes are created and that all of them run the 
+
+Output for the parallel code:
+using test.c as the testing program
+
+
+losh> ./test
+  count> 5
+  [p]arallel or [s]equential> p
+  timeout> 5
+iteration number is 0
+Parent process is: 5043 with the child: 5090
+iteration number is 1
+Parent process is: 5043 with the child: 5091
+time_elapsed: 0.001294, timeout: 5 
+time_elapsed: 0.000017, timeout: 5 
+time_elapsed: 0.001296, timeout: 5 
+time_elapsed: 0.000018, timeout: 5 
+time_elapsed: 0.001297, timeout: 5 
+iteration number is 4
+Parent process is: 5043 with the child: 5094
+iteration number is 3
+Parent process is: 1398 with the child: 5093
+ran test file
+ran test file
+ran test file
+ran test file
+iteration number is 2
+Parent process is: 1398 with the child: 5092
+ran test file
+time_elapsed inside test file: 1.740397
+finished test file
+time_elapsed inside test file: 1.740329
+finished test file
+time_elapsed inside test file: 1.748057
+finished test file
+time_elapsed inside test file: 1.661998
+finished test file
+time_elapsed inside test file: 1.746940
+finished test file
