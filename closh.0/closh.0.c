@@ -139,7 +139,7 @@ int main() {
 				
                 if (childPidArr[j] > 0) { 
 					
-                    waitpid(childPidArr[j], NULL, 0); // wait for child processess to die
+                    waitpid(childPidArr[j], NULL, 0); // terminate any lingering child processes
 				}
 			}
 
