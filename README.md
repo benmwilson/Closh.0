@@ -38,10 +38,27 @@ The goal of this project is to implement a simple shell in C, which will require
 system calls directly. Using system calls like fork and exec, we have implemented a command-line shell like Bash. 
 Closh.0, (aka Clone in the Shell Zero), is a simple shell-like program designed to run multiple copies of a program at once. 
 
+#### Team Contributions
+The team decided on a scaled down version of the Scrum development method. As we would assign tasks then cconduct short meetings to communicate our findings, then proceed to test our code then implement the most ideal version of what we discussed and coded. The approach taken allowed us to develop a better understanding of the concepts and provided a great platform for the project's success.
+
+## Section 1 (fork, exec, waitpid, kill)
+The team did extensive research of each functions, then after consulting each other we tested them in our individual code. Richardo then implemented the tested code in the final draft.
+
+## Section 2 (Sequential, Parallel)
+The team did extensive research on the of both functions, then after consulting each other and finding issues Eric did further research  on the parallel process to find better documentation. We tested our findings in our individual codes, then Eric implemented the tested code in the final draft.
+
+## Section 3 (Timeouts)
+Eric researched there operation extensively. Afterwhich the code was tested by the team, and lastly implemented in our final draft by Ben.
+
+## Section 4 (Code Structure and commenting)
+The structure of the code was done using proper coding eticate and commented to ensure readability as well as maintainablity. In an effort to ensure anyone code understand the functions and make changes if needed.
 
 #### Design Choices
+Before we started the design process, in our initial meeting we analysed the assignment documentation and explained its parts to gain a better understanding. Afterwhich, we decided to take an idividual approach in developing the sequential process before attempting the parallel portion; while maintaining comunication throughout the process. Once the sequential process was fleshed out and working, we we're able to tackle the parallel portion and implement some of the sequential logic to do so. 
 
-When designing this program, we chose to first tackle the sequential execution prior to attempting the parallel portion. Once the sequential process was fleshed out and working, we we're able to tackle the parallel portion and implement some of the sequential logic to do so. We struggled to implement the timeout functionality using regular clocks, but eventually got it working thanks to a helpful guide that explained how to use SIGALRM and the alarm function properly. We stored our signal handler, aptly named the terminator, outside of any loops or functions to ensure it could be shared and accessed by both the parallel and sequential executions.
+In both the sequential and parallel process count was given as the amount of child processes needed, which was implemted using fork(). While the parent and child processes pid was retreived using getppid() and getpid(). It must be noted that the fork is called until the parent process is exited, when fork return -1 for failure or >0  for creating a new child process. In the sequential process a waitpid is called to stall a process for timeout seconds as the a prior process is completed. While in the parallel process the waitpid is not needed as the processes can be done at once.
+
+We struggled to implement the timeout functionality using regular clocks, but eventually got it working thanks to a helpful guide that explained how to use SIGALRM and the alarm function properly. We stored our signal handler, aptly named the terminator, outside of any loops or functions to ensure it could be shared and accessed by both the parallel and sequential executions.
 
 
 #### Features
