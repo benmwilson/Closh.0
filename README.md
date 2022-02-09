@@ -27,7 +27,6 @@
  - [Project Outline](#project-outline)
  - [Design Choices](#design-choices)
  - [Feautres](#features)
- - [Unfinished Feautres](#unfinished-features)
  - [Sample Output](/sample-output.txt) TBD
 
 ### Contributors
@@ -39,12 +38,12 @@
 
 The goal of this project is to implement a simple shell in C, which will require the use of
 system calls directly. Using system calls like fork and exec, we have implemented a command-line shell like Bash. 
-Closh.0, (aka Clone Shell Zero), is a simple shell-like program designed to run multiple copies of a program at once. 
+Closh.0, (aka Clone in the Shell Zero), is a simple shell-like program designed to run multiple copies of a program at once. 
 
 
 #### Design Choices
 
-
+When designing this program, we chose to first tackle the sequential execution prior to attempting the parallel portion. Once the sequential process was fleshed out and working, we we're able to tackle the parallel portion and implement some of the sequential logic to do so. We struggled to implement the timeout functionality using regular clocks, but eventually got it working thanks to a helpful guide that explained how to use SIGALRM and the alarm function properly. We stored our signal handler, aptly named the terminator, outside of any loops or functions to ensure it could be shared and accessed by both the parallel and sequential executions.
 
 
 #### Features
@@ -58,9 +57,6 @@ The features included in this project are creating new processes, having the pro
   * For the paralallel code, the lack of a waitpid() call or a waitpid() call with the parameter of WNOHANG will cause the parent process to continue without waiting for the child process to finish which causes the parent and all the children processes to run in parallel.
 
 *  The user produces a timeout value. If the time elapsed of the child process is greater than the timeout value then the parent kills the child process.
-
-### Unfinished Features
-* Could not get our timer to work properly. The code for checking if time elapsed is greater than the timeout value works properly, so the parent will kill the child process properly if this condition is met. The issue we are running into is tracking the time that the child process is taking. We are not sure when the timer should start and when the timer should end for the timeout value to produce a reasonable value. How we might fix this if we had more time would be figureout how to better track the child process when the execvp() function is called and track the new program.
 
 
 ### Resources
