@@ -21,6 +21,7 @@
 
 - [Documentation](#documentation)
 - [Contributors](#contributors)
+- [Resources](#resources)
 
 ### Documentation
  - [Project Outline](#project-outline)
@@ -28,7 +29,6 @@
  - [Feautres](#features)
  - [Unfinished Feautres](#unfinished-features)
  - [Sample Output](/sample-output.txt) TBD
- - [Resources](#resources)
 
 ### Contributors
  - [Ben Wilson](https://github.com/benmwilson)
@@ -63,10 +63,11 @@ The features included in this project are creating new processes, having the pro
 * Could not get our timer to work properly. The code for checking if time elapsed is greater than the timeout value works properly, so the parent will kill the child process properly if this condition is met. The issue we are running into is tracking the time that the child process is taking. We are not sure when the timer should start and when the timer should end for the timeout value to produce a reasonable value. How we might fix this if we had more time would be figureout how to better track the child process when the execvp() function is called and track the new program.
 
 
-#### Resources
-* Eric's resources 
-  * https://www.geeksforgeeks.org/fork-system-call/
-  * https://www.geeksforgeeks.org/difference-fork-exec/
-  * https://www.geeksforgeeks.org/how-to-measure-time-taken-by-a-program-in-c/
-  * https://www.delftstack.com/howto/c/kill-child-process-in-c/
-  * https://canvas.ubc.ca/courses/86705/discussion_topics/1334092
+### Resources
+
+* https://www.geeksforgeeks.org/fork-system-call/
+* https://www.geeksforgeeks.org/difference-fork-exec/
+* https://www.geeksforgeeks.org/how-to-measure-time-taken-by-a-program-in-c/ 
+* https://www.delftstack.com/howto/c/kill-child-process-in-c  
+* https://canvas.ubc.ca/courses/86705/discussion_topics/1334092
+* https://linuxhint.com/sigalarm_alarm_c_language/
