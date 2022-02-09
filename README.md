@@ -67,7 +67,7 @@ The features included in this project are creating new processes, having the pro
 
 As a group, we decided to each attempt to tackle the project individually and try out our own different implementations. Each member worked in seperate branches until the code was eventually comprised into the main branch. We eached coded out a parallel and sequential execution to completion and then worked together to pick the best algorithm and make any suitable changes or fixes. The final code is the result of equal effort on the behalf of all group members, not one individual effort.
 
-Please checkout other branches to see that multiple closh programs have been made.
+Take a look at the other branches to see the other implementations and designs.
 
 
 ### Resources
