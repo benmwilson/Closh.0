@@ -29,12 +29,12 @@ char readChar() {
     return c;
 }
 
-pid_t childPid = -1; // create first child pid
+pid_t childPid;
 
-static void timeout_kill(int signo) { // handler for the alarm, runs a fade on the calling process
+void terminator(int inSignal) { // handler function for the alarm, aka the terminator
 	
-    printf("ALARM: Alarm signal called, 360 no scoping the child process: %d out of existence...\n", childPid);
-    kill(childPid, SIGKILL);
+    printf("Alarm signal called, terminating child process %d. I'll be back...\n", childPid);
+    kill(childPid, SIGKILL); // kill child process, rest in pep
 }
 
 // main method - program entry point
@@ -46,6 +46,7 @@ int main() {
     
     int parallel; // whether to run in parallel or sequentially
     
+    signal(SIGALRM, terminator);
     
     while (TRUE) { // main shell input loop
         
@@ -77,39 +78,72 @@ int main() {
         
         if (parallel == 0) { // sequential execution
 			
-            int i;
-			
-			for (i = 0; i < count; i++) {
+            for (int i = 0; i < count; i++) {
+
+                childPid = fork();
 				
-                if ((childPid = fork()) < 0) { // quick error catching, display error msg 
+                if (childPid == -1) { // quick error catching, display error msg 
 					
-                    fprintf(stderr, "ERROR: Something went wrong when forking (don't ask us), please try again.");
-					exit(1);
+                    printf("Error while forking (don't ask us), please try again.");
+					exit(1); // exit failure, abnormal program termination
 				}
 
 				else if (childPid == 0) { // have child process do its work and then immediately exit
 					
-                    printf("CHILD PROCESS: %d forked with PARENT PROCESS ID: %d\n", getpid(), getppid());
+                    printf("Child process %d forked with Parent process %d\n", getpid(), getppid());
 					execvp(cmdTokens[0], cmdTokens); // swaps out the current process with the program given from user
-					printf("CHILD PROCESS: %d can not execute %s\n",getpid(), cmdTokens[0]); // only executes if the process fails :(
-					exit(1);
+					
+                    printf("Child process %d failed execution\n", getpid()); // only executes if the process fails :(
+                    exit(1); // exit failure
 
 				} else { // wait for child process to wrap up
 					
-                    alarm(timeout); // if the child process that is currently running exceeds the timeout then the alarm goes and offs it
-					waitpid(-1, NULL, 0); // sits and waits for all child processes to end 
+                    alarm(timeout); // if the child process that is currently running exceeds the timeout then the alarm goes
+					
+                    waitpid(-1, NULL, 0); // sits and waits for all child processes to end  (-1 for any process)
 
 				}
 			}
 
-			alarm(0); //resets the alarm after sequential execution
+			alarm(0); // alarm reset after each sequential execution
 
 		} else { // parallel execution
+            
+			pid_t childPidArr[count]; // child pid array
 			
-            //TBD
+			for (int i = 0; i < count; i++) {
+				
+                childPidArr[i] = fork();
+				
+                if(childPidArr[i] == -1){ // quick error catching, display error msg 
+					
+                    printf("Error while forking (don't ask us), please try again.");
+					exit(1); // exit failure, abnormal program termination
+
+                } else if (childPidArr[i] == 0) { //child process does work then exits
+					
+                    printf("Child process %d forked with Parent process %d\n", getpid(), getppid());
+					alarm(timeout);
+					
+                    execvp(cmdTokens[0], cmdTokens); // swaps out the current process with the program given from user
+					
+                    printf("Child process %d failed execution\n",getpid()); // only reached if running there is a failure :(
+				    
+                    exit(1);
+				}
+			}
+			
+            for (int j = 0; j < count; j++) {
+				
+                if (childPidArr[j] > 0) { 
+					
+                    waitpid(childPidArr[j], NULL, 0); // wait for child processess to die
+				}
+			}
 
 		}
 	} 
 	
 }
+
 
