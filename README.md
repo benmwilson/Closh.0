@@ -41,7 +41,7 @@ Closh.0, (aka Clone in the Shell Zero), is a simple shell-like program designed 
 #### Team Contributions
 The team decided on a scaled down version of the Scrum development method. As we would assign tasks then cconduct short meetings to communicate our findings, then proceed to test our code then implement the most ideal version of what we discussed and coded. The approach taken allowed us to develop a better understanding of the concepts and provided a great platform for the project's success.
 
-## Section 1 (fork, exec, waitpid, kill)
+## Section 1 (fork, exec, waitpid, alarm,kill)
 The team did extensive research of each functions, then after consulting each other we tested them in our individual code. Richardo then implemented the tested code in the final draft.
 
 ## Section 2 (Sequential, Parallel)
