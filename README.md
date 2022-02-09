@@ -38,20 +38,6 @@ The goal of this project is to implement a simple shell in C, which will require
 system calls directly. Using system calls like fork and exec, we have implemented a command-line shell like Bash. 
 Closh.0, (aka Clone in the Shell Zero), is a simple shell-like program designed to run multiple copies of a program at once. 
 
-#### Team Contributions
-The team decided on a scaled down version of the Scrum development method. As we would assign tasks then cconduct short meetings to communicate our findings, then proceed to test our code then implement the most ideal version of what we discussed and coded. The approach taken allowed us to develop a better understanding of the concepts and provided a great platform for the project's success.
-
-## Section 1 (fork, exec, waitpid, alarm,kill)
-The team did extensive research of each functions, then after consulting each other we tested them in our individual code. Richardo then implemented the tested code in the final draft.
-
-## Section 2 (Sequential, Parallel)
-The team did extensive research on the of both functions, then after consulting each other and finding issues Eric did further research  on the parallel process to find better documentation. We tested our findings in our individual codes, then Eric implemented the tested code in the final draft.
-
-## Section 3 (Timeouts)
-Eric researched there operation extensively. Afterwhich the code was tested by the team, and lastly implemented in our final draft by Ben.
-
-## Section 4 (Code Structure and commenting)
-The structure of the code was done using proper coding eticate and commented to ensure readability as well as maintainablity. In an effort to ensure anyone code understand the functions and make changes if needed.
 
 #### Design Choices
 Before we started the design process, in our initial meeting we analysed the assignment documentation and explained its parts to gain a better understanding. Afterwhich, we decided to take an idividual approach in developing the sequential process before attempting the parallel portion; while maintaining comunication throughout the process. Once the sequential process was fleshed out and working, we we're able to tackle the parallel portion and implement some of the sequential logic to do so. 
@@ -79,7 +65,7 @@ The features included in this project are creating new processes, having the pro
  - [Eric Shanks](https://github.com/EricShanks68)
  - [Richardo Brown](https://github.com/Buttertoastt)
 
-As a group, we decided to each attempt to tackle the project individually and try out our own different implementations. We eached coded out a parallel and sequential execution and then worked together to pick the best algorithm and make any suitable changes or fixes. The final code is the result of equal effort on the behalf of all group members, not one individual effort.
+As a group, we decided to each attempt to tackle the project individually and try out our own different implementations. Each member worked in seperate branches until the code was eventually comprised into the main branch. We eached coded out a parallel and sequential execution to completion and then worked together to pick the best algorithm and make any suitable changes or fixes. The final code is the result of equal effort on the behalf of all group members, not one individual effort.
 
 
 ### Resources
