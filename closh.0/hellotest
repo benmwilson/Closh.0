@@ -1,4 +1,3 @@
-#!/bin/bash
 # Quick and dirty sample bash script that prints "Hello World" and then goes to bed for 5 seconds
 
 echo "Hello World"
