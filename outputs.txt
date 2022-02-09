@@ -1,3 +1,5 @@
+Test 1 - Sequential with no chance for timeout
+
 ben@GigatronPrime:~/Documents/GitHub/Closh.0/closh.0$ ./closh.0
 closh.0> ./hellotest
   count> 5
@@ -20,6 +22,8 @@ Hello World
 Alarm signal called, terminating child process 3884. I'll be back...
 closh.0>
 
+Test 2 - Sequential with chance for timeout
+
 ben@GigatronPrime:~/Documents/GitHub/Closh.0/closh.0$ ./closh.0
 closh.0> ./hellotest
   count> 3
@@ -36,6 +40,9 @@ Hello World
 Alarm signal called, terminating child process 4004. I'll be back...
 closh.0> 
 
+Test 3 - Parallel with no chance for timeout
+
+ben@GigatronPrime:~/Documents/GitHub/Closh.0/closh.0$ ./closh.0
 closh.0> ./hellotest
   count> 4
   [p]arallel or [s]equential> p
@@ -50,6 +57,9 @@ Hello World
 Hello World
 closh.0> 
 
+Test 4 - Parallel with chance for timeout
+
+ben@GigatronPrime:~/Documents/GitHub/Closh.0/closh.0$ ./closh.0
 closh.0> ./hellotest
   count> 2
   [p]arallel or [s]equential> p
